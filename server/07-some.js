@@ -1,4 +1,4 @@
-const numbers = [1, 2, 3, 4];
+// const numbers = [1, 2, 3, 4];
 
 // metodo .some() usando un for
 /*let resp = false;
@@ -16,7 +16,7 @@ console.log(resp);*/
 console.log(resp);*/
 
 //metodo .some() usando objetos
-const data = [
+/* const data = [
 	{
 		name: "Nicolas",
 		level: "low",
@@ -46,3 +46,51 @@ const data = [
 
 const resp = data.some((item) => item.delivered);
 console.log(resp);
+ */
+
+const dates = [
+	{
+		startDate: new Date(2021, 1, 1, 10),
+		endDate: new Date(2021, 1, 1, 11),
+		title: "Cita de trabajo",
+	},
+	{
+		startDate: new Date(2021, 1, 1, 15),
+		endDate: new Date(2021, 1, 1, 15, 30),
+		title: "Cita de mi jefe",
+	},
+	{
+		startDate: new Date(2021, 1, 1, 20),
+		endDate: new Date(2021, 1, 1, 21),
+		title: "Cena",
+	},
+];
+
+//Libreria date-fns para comprobar si dos fechas colisionan entre si
+//npm install date-fns
+const { areIntervalsOverlapping } = require("date-fns");
+
+const newAppointment = {
+	startDate: new Date(2021, 1, 1, 8),
+	endDate: new Date(2021, 1, 1, 9, 30),
+};
+
+const isOverlap = (newDate) => {
+	return dates.some((date) => {
+		return areIntervalsOverlapping(
+			{ start: date.startDate, end: date.endDate },
+			{ start: newDate.startDate, end: newDate.endDate }
+		);
+	});
+};
+
+console.log(isOverlap(newAppointment));
+
+//Practica
+const numbers = [1, 3, 5, 7, 11];
+
+function checkArray(numbers) {
+	return numbers.some((item) => item % 2 === 0);
+}
+
+checkArray(numbers);
